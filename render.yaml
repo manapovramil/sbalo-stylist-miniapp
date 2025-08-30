@@ -5,24 +5,13 @@ services:
     plan: free
     buildCommand: |
       pip install -r server/requirements.txt
-      cd webapp && npm ci && npm run build
+      cd webapp && npm install && npm run build
     startCommand: uvicorn server.main:app --host 0.0.0.0 --port $PORT
     autoDeploy: true
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.9
-
-  - type: worker
-    name: sbalo-stylist-bot
-    env: python
-    plan: free
-    buildCommand: pip install -r bot/requirements.txt
-    startCommand: python -m bot.main
-    autoDeploy: true
-    envVars:
-      - key: PYTHON_VERSION
-        value: 3.11.9
       - key: BOT_TOKEN
-        sync: false
+        sync: false           # сюда добавишь токен бота в Render
       - key: WEBAPP_URL
         value: https://sbalo-stylist-api.onrender.com/app
