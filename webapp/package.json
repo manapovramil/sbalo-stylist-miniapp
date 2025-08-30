@@ -1,0 +1,17 @@
+{
+  "name": "sbalo-stylist-miniapp",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && rm -rf ../server/public && mkdir -p ../server/public && cp -r dist/* ../server/public/",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "4.3.1",
+    "vite": "5.4.3"
+  }
+}
