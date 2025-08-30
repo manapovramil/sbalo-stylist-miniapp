@@ -1,6 +1,7 @@
 # server/main.py
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import RedirectResponse
 from pydantic import BaseModel
 from typing import List
 import os
@@ -45,10 +46,14 @@ def submit(res: MissionResult):
 @app.get("/healthz")
 def health():
     return {"ok": True}
+@app.get("/")
+def root_redirect():
+    return RedirectResponse(url="/app")
+
 
 # Статика (SPA): сборка Vite копируется в server/public
 # html=True — чтобы /app и любые SPA-маршруты отдавали index.html
-app.mount("/", StaticFiles(directory="server/public", html=True), name="static")
+app.mount("/app", StaticFiles(directory="server/public", html=True), name="static")
 
 
 # ======================
